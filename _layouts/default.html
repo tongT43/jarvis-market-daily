@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | default: site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="masthead">
+      <a href="{{ '/' | relative_url }}" class="brand">JARVIS<span>MARKETS</span></a>
+      <div class="header-right">
+        <div class="date">{{ site.time | date: '%A %d %B %Y' }}</div>
+        <div class="edition-label">Édition du jour</div>
+      </div>
+    </div>
+    <nav class="sections">
+      <span>Marchés</span>
+      <span>Indices</span>
+      <span>Secteurs</span>
+      <span>Agenda</span>
+    </nav>
+  </header>
+  <main class="container">
+    {{ content }}
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-brand">JARVIS MARKETS</span>
+      <span class="footer-sep">—</span>
+      <span>Généré automatiquement · Ne constitue pas un conseil en investissement</span>
+      <span class="footer-sep">·</span>
+      <a href="https://github.com/tongT43/jarvis-market-daily">Source GitHub</a>
+    </div>
+  </footer>
+</body>
+</html>

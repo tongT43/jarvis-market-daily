@@ -1,0 +1,16 @@
+title: Jarvis Markets
+tagline: Recap quotidien des marchés
+description: Veille personnalisée des marchés financiers, mise à jour chaque matin.
+plugins: []
+exclude:
+  - README.md
+collections:
+  reports:
+    output: true
+    permalink: /:collection/:name/
+defaults:
+  - scope:
+      path: ""
+      type: "reports"
+    values:
+      layout: "report"

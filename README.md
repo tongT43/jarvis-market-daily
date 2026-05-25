@@ -1,5 +1,5 @@
 # jarvis-market-daily
 
-## Rapports quotidiens
+Site live : https://tongT43.github.io/jarvis-market-daily/
 
-- [2026-05-22](reports/2026-05-22.md) - Recap du 22/05/2026
+Rapports historiques dans le dossier `_reports/`.

@@ -1,0 +1,578 @@
+/* ============================================================
+   JARVIS MARKETS — Feuille de style magazine financier
+   Palette : ivoire #f7f3ec · anthracite #1a1a1a · saumon #e0734a
+             bleu nuit #0a1e3f · vert hausse #0a8f3c · rouge baisse #c0392b
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. VARIABLES & RESET
+   ---------------------------------------------------------- */
+:root {
+  --color-bg:        #f7f3ec;
+  --color-bg-white:  #ffffff;
+  --color-text:      #1a1a1a;
+  --color-text-muted:#5a5a5a;
+  --color-accent:    #e0734a;
+  --color-navy:      #0a1e3f;
+  --color-up:        #0a8f3c;
+  --color-down:      #c0392b;
+  --color-border:    #d9d0c4;
+  --color-rule:      #e0734a;
+
+  --font-serif:  'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans:   'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:   'JetBrains Mono', 'Courier New', monospace;
+
+  --max-width: 740px;
+  --gutter: 1.5rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ----------------------------------------------------------
+   2. HEADER & MASTHEAD
+   ---------------------------------------------------------- */
+.site-header {
+  background-color: var(--color-navy);
+  color: #fff;
+  border-bottom: 3px solid var(--color-accent);
+}
+
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.2rem var(--gutter);
+}
+
+.brand {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.brand span {
+  color: var(--color-accent);
+  margin-left: 0.15em;
+}
+
+.header-right {
+  text-align: right;
+}
+
+.date {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.edition-label {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin-top: 0.15rem;
+}
+
+/* Navigation */
+.sections {
+  display: flex;
+  gap: 0;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.sections span {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.55);
+  padding: 0.55rem 1rem 0.55rem 0;
+  margin-right: 1.2rem;
+  cursor: default;
+  transition: color 0.15s;
+}
+
+.sections span:hover { color: var(--color-accent); }
+
+/* ----------------------------------------------------------
+   3. LAYOUT — CONTAINER
+   ---------------------------------------------------------- */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem var(--gutter) 4rem;
+}
+
+/* ----------------------------------------------------------
+   4. HERO (page d'accueil)
+   ---------------------------------------------------------- */
+.hero {
+  margin-bottom: 3rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.kicker {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+
+.hero h2 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--color-navy);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.hero-tagline {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.hero-meta {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+/* Mini-ticker sur la page d'accueil */
+.hero-ticker {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.hero-ticker .tile {
+  flex: 1 1 120px;
+  min-width: 100px;
+}
+
+.hero-cta {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-navy);
+  text-decoration: none;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.hero-cta:hover { color: var(--color-accent); }
+
+/* ----------------------------------------------------------
+   5. ARCHIVE
+   ---------------------------------------------------------- */
+.archive { margin-top: 1rem; }
+
+.archive h2 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.archive ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.archive li {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.archive li a {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.15s;
+}
+
+.archive li a:hover { color: var(--color-accent); }
+
+.archive li a time {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  white-space: nowrap;
+  min-width: 6rem;
+}
+
+/* ----------------------------------------------------------
+   6. REPORT HEADER
+   ---------------------------------------------------------- */
+.report-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 3px solid var(--color-accent);
+}
+
+.report-date {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-accent);
+  margin-bottom: 0.6rem;
+}
+
+.report-title {
+  font-family: var(--font-serif);
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: var(--color-navy);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1rem;
+  margin-top: 0.75rem;
+}
+
+/* ----------------------------------------------------------
+   7. TICKER — BLOC CHIFFRES CLÉS
+   ---------------------------------------------------------- */
+.ticker {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.tile {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.85rem 1rem;
+  text-align: center;
+  border-top: 3px solid var(--color-border);
+  transition: transform 0.1s;
+}
+
+.tile.up   { border-top-color: var(--color-up); }
+.tile.down { border-top-color: var(--color-down); }
+
+.tile-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.tile-value {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.tile.up   .tile-value { color: var(--color-up); }
+.tile.down .tile-value { color: var(--color-down); }
+
+/* ----------------------------------------------------------
+   8. REPORT BODY — TYPOGRAPHIE
+   ---------------------------------------------------------- */
+.report-body h2 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin: 2.2rem 0 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.report-body h3 {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  margin: 1.1rem 0 0.5rem;
+}
+
+.report-body p {
+  margin-bottom: 1.1rem;
+  font-size: 0.97rem;
+  line-height: 1.75;
+}
+
+.report-body ul,
+.report-body ol {
+  padding-left: 1.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.report-body li {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 0.35rem;
+}
+
+.report-body strong { font-weight: 700; }
+.report-body em { font-style: italic; color: var(--color-text-muted); }
+
+/* Coloration automatique des variations +/- dans le corps */
+.report-body li strong:first-child {
+  color: var(--color-navy);
+}
+
+/* ----------------------------------------------------------
+   9. TABLEAUX D'INDICES
+   ---------------------------------------------------------- */
+.report-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.report-body thead th {
+  background: var(--color-navy);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.65rem 1rem;
+  text-align: left;
+}
+
+.report-body tbody tr {
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.12s;
+}
+
+.report-body tbody tr:last-child { border-bottom: none; }
+.report-body tbody tr:hover { background: rgba(224, 115, 74, 0.05); }
+
+.report-body tbody td {
+  padding: 0.6rem 1rem;
+  vertical-align: middle;
+}
+
+/* Variation column — couleur selon signe */
+.report-body tbody td:last-child {
+  font-weight: 700;
+  text-align: right;
+}
+
+/* ----------------------------------------------------------
+   10. LISTES PALMARÈS (Top mouvements)
+   ---------------------------------------------------------- */
+.report-body ol {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: rank;
+}
+
+.report-body ol li {
+  counter-increment: rank;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.93rem;
+}
+
+.report-body ol li:last-child { border-bottom: none; }
+
+.report-body ol li::before {
+  content: counter(rank);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  min-width: 1.6rem;
+  text-align: center;
+  padding: 0.1rem 0.3rem;
+  flex-shrink: 0;
+}
+
+/* ----------------------------------------------------------
+   11. HORIZONTAL RULE
+   ---------------------------------------------------------- */
+.report-body hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0;
+}
+
+/* ----------------------------------------------------------
+   12. LIENS
+   ---------------------------------------------------------- */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+/* ----------------------------------------------------------
+   13. FOOTER
+   ---------------------------------------------------------- */
+.site-footer {
+  background: var(--color-navy);
+  color: rgba(255,255,255,0.45);
+  padding: 1.2rem var(--gutter);
+  margin-top: 0;
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.06em;
+}
+
+.footer-sep { color: rgba(255,255,255,0.25); }
+
+.site-footer a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+.site-footer a:hover { text-decoration: underline; }
+
+/* ----------------------------------------------------------
+   14. RESPONSIVE MOBILE
+   ---------------------------------------------------------- */
+@media (max-width: 640px) {
+  .masthead {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .header-right { text-align: left; }
+
+  .brand { font-size: 1.5rem; }
+
+  .sections {
+    flex-wrap: wrap;
+    gap: 0.2rem;
+  }
+
+  .sections span {
+    font-size: 0.62rem;
+    padding: 0.4rem 0.7rem 0.4rem 0;
+    margin-right: 0.5rem;
+  }
+
+  .ticker {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .report-title { font-size: 1.6rem; }
+
+  .report-body table {
+    font-size: 0.78rem;
+  }
+
+  .report-body thead th,
+  .report-body tbody td {
+    padding: 0.5rem 0.6rem;
+  }
+
+  .archive li a {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .ticker { grid-template-columns: 1fr 1fr; }
+  .tile-value { font-size: 0.95rem; }
+}

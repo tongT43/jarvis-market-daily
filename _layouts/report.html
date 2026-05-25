@@ -1,0 +1,45 @@
+---
+layout: default
+---
+<article class="report">
+  <div class="report-header">
+    <time class="report-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%A %d %B %Y' }}</time>
+    <h1 class="report-title">{{ page.title }}</h1>
+    {% if page.tagline %}<p class="tagline">{{ page.tagline }}</p>{% endif %}
+  </div>
+  {% if page.performance %}
+  <div class="ticker">
+    {% assign cac_class = "neutral" %}
+    {% if page.performance.cac40 contains "+" %}{% assign cac_class = "up" %}{% endif %}
+    {% if page.performance.cac40 contains "-" %}{% assign cac_class = "down" %}{% endif %}
+    <div class="tile {{ cac_class }}">
+      <span class="tile-label">CAC 40</span>
+      <strong class="tile-value">{{ page.performance.cac40 }}</strong>
+    </div>
+    {% assign sp_class = "neutral" %}
+    {% if page.performance.sp500 contains "+" %}{% assign sp_class = "up" %}{% endif %}
+    {% if page.performance.sp500 contains "-" %}{% assign sp_class = "down" %}{% endif %}
+    <div class="tile {{ sp_class }}">
+      <span class="tile-label">S&amp;P 500</span>
+      <strong class="tile-value">{{ page.performance.sp500 }}</strong>
+    </div>
+    {% assign nq_class = "neutral" %}
+    {% if page.performance.nasdaq contains "+" %}{% assign nq_class = "up" %}{% endif %}
+    {% if page.performance.nasdaq contains "-" %}{% assign nq_class = "down" %}{% endif %}
+    <div class="tile {{ nq_class }}">
+      <span class="tile-label">Nasdaq</span>
+      <strong class="tile-value">{{ page.performance.nasdaq }}</strong>
+    </div>
+    {% assign dj_class = "neutral" %}
+    {% if page.performance.dowjones contains "+" %}{% assign dj_class = "up" %}{% endif %}
+    {% if page.performance.dowjones contains "-" %}{% assign dj_class = "down" %}{% endif %}
+    <div class="tile {{ dj_class }}">
+      <span class="tile-label">Dow Jones</span>
+      <strong class="tile-value">{{ page.performance.dowjones }}</strong>
+    </div>
+  </div>
+  {% endif %}
+  <div class="report-body">
+    {{ content }}
+  </div>
+</article>
