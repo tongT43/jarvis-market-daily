@@ -1,0 +1,61 @@
+- ticker: FGR.PA
+  name: Eiffage
+  sector: BTP / Energie
+  note: Alternance Thomas
+- ticker: DG.PA
+  name: Vinci
+  sector: BTP / Energie
+- ticker: TTE.PA
+  name: TotalEnergies
+  sector: BTP / Energie
+- ticker: ENGI.PA
+  name: Engie
+  sector: BTP / Energie
+- ticker: HO.PA
+  name: Thales
+  sector: Defense / Aero
+- ticker: AM.PA
+  name: Dassault Aviation
+  sector: Defense / Aero
+- ticker: AIR.PA
+  name: Airbus
+  sector: Defense / Aero
+- ticker: SAF.PA
+  name: Safran
+  sector: Defense / Aero
+- ticker: ASML.AS
+  name: ASML
+  sector: Tech / Semi
+- ticker: STMPA.PA
+  name: STMicroelectronics
+  sector: Tech / Semi
+- ticker: NVDA
+  name: Nvidia
+  sector: Tech / Semi
+- ticker: AMD
+  name: AMD
+  sector: Tech / Semi
+- ticker: BNP.PA
+  name: BNP Paribas
+  sector: Banques
+- ticker: CS.PA
+  name: AXA
+  sector: Banques
+- ticker: GLE.PA
+  name: Societe Generale
+  sector: Banques
+- ticker: ACA.PA
+  name: Credit Agricole
+  sector: Banques
+- ticker: SAN.PA
+  name: Sanofi
+  sector: Sante
+- ticker: EL.PA
+  name: EssilorLuxottica
+  sector: Sante
+- ticker: LLY
+  name: Eli Lilly
+  sector: Sante
+- ticker: NOVO-B.CO
+  name: Novo Nordisk
+  sector: Sante

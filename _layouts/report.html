@@ -2,44 +2,61 @@
 layout: default
 ---
 <article class="report">
+  {% if page.watchlist_top %}
+  <section class="watchlist-hero">
+    <div class="kicker">Top mouvements de ma watchlist</div>
+    <div class="watchlist-cards">
+      {% for stock in page.watchlist_top %}
+      <div class="stock-card">
+        <div class="stock-ticker">{{ stock.ticker }}</div>
+        <div class="stock-name">{{ stock.name }}</div>
+        <div class="stock-change {% if stock.change contains '-' %}neg{% elsif stock.change contains '+' %}pos{% endif %}">{{ stock.change }}</div>
+        <div class="stock-meta"><span>{{ stock.sector }}</span><span>{{ stock.price }}</span></div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
   <div class="report-header">
-    <time class="report-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%A %d %B %Y' }}</time>
-    <h1 class="report-title">{{ page.title }}</h1>
+    <time>{{ page.date | date: '%A %d %B %Y' }}</time>
+    <h1>{{ page.title }}</h1>
     {% if page.tagline %}<p class="tagline">{{ page.tagline }}</p>{% endif %}
   </div>
+
   {% if page.performance %}
   <div class="ticker">
-    {% assign cac_class = "neutral" %}
-    {% if page.performance.cac40 contains "+" %}{% assign cac_class = "up" %}{% endif %}
-    {% if page.performance.cac40 contains "-" %}{% assign cac_class = "down" %}{% endif %}
-    <div class="tile {{ cac_class }}">
-      <span class="tile-label">CAC 40</span>
-      <strong class="tile-value">{{ page.performance.cac40 }}</strong>
-    </div>
-    {% assign sp_class = "neutral" %}
-    {% if page.performance.sp500 contains "+" %}{% assign sp_class = "up" %}{% endif %}
-    {% if page.performance.sp500 contains "-" %}{% assign sp_class = "down" %}{% endif %}
-    <div class="tile {{ sp_class }}">
-      <span class="tile-label">S&amp;P 500</span>
-      <strong class="tile-value">{{ page.performance.sp500 }}</strong>
-    </div>
-    {% assign nq_class = "neutral" %}
-    {% if page.performance.nasdaq contains "+" %}{% assign nq_class = "up" %}{% endif %}
-    {% if page.performance.nasdaq contains "-" %}{% assign nq_class = "down" %}{% endif %}
-    <div class="tile {{ nq_class }}">
-      <span class="tile-label">Nasdaq</span>
-      <strong class="tile-value">{{ page.performance.nasdaq }}</strong>
-    </div>
-    {% assign dj_class = "neutral" %}
-    {% if page.performance.dowjones contains "+" %}{% assign dj_class = "up" %}{% endif %}
-    {% if page.performance.dowjones contains "-" %}{% assign dj_class = "down" %}{% endif %}
-    <div class="tile {{ dj_class }}">
-      <span class="tile-label">Dow Jones</span>
-      <strong class="tile-value">{{ page.performance.dowjones }}</strong>
-    </div>
+    <div class="tile"><span>CAC 40</span><strong class="{% if page.performance.cac40 contains '-' %}neg{% else %}pos{% endif %}">{{ page.performance.cac40 }}</strong></div>
+    <div class="tile"><span>S&amp;P 500</span><strong class="{% if page.performance.sp500 contains '-' %}neg{% else %}pos{% endif %}">{{ page.performance.sp500 }}</strong></div>
+    <div class="tile"><span>Nasdaq</span><strong class="{% if page.performance.nasdaq contains '-' %}neg{% else %}pos{% endif %}">{{ page.performance.nasdaq }}</strong></div>
+    <div class="tile"><span>Dow Jones</span><strong class="{% if page.performance.dowjones contains '-' %}neg{% else %}pos{% endif %}">{{ page.performance.dowjones }}</strong></div>
   </div>
   {% endif %}
+
   <div class="report-body">
     {{ content }}
   </div>
+
+  {% if page.watchlist_all %}
+  <section class="watchlist-table">
+    <h2>Toute ma watchlist</h2>
+    {% assign by_sector = page.watchlist_all | group_by: 'sector' %}
+    {% for group in by_sector %}
+    <div class="sector-group">
+      <h3>{{ group.name }}</h3>
+      <table>
+        <tbody>
+          {% for stock in group.items %}
+          <tr>
+            <td class="t-ticker">{{ stock.ticker }}</td>
+            <td class="t-name">{{ stock.name }}</td>
+            <td class="t-change {% if stock.change contains '-' %}neg{% elsif stock.change contains '+' %}pos{% endif %}">{{ stock.change }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
 </article>
