@@ -2,9 +2,23 @@
 layout: default
 ---
 <article class="report">
-  {% if page.watchlist_top %}
-  <section class="watchlist-hero">
-    <div class="kicker">Top mouvements de ma watchlist</div>
+  <div class="report-header">
+    <time>{{ page.date | date: '%A %d %B %Y' }}</time>
+    <h1>{{ page.title }}</h1>
+    {% if page.tagline %}<p class="tagline">{{ page.tagline }}</p>{% endif %}
+  </div>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="watchlist">Ma watchlist</button>
+    <button class="tab" data-tab="marches">Marches</button>
+    <button class="tab" data-tab="mouvements">Mouvements</button>
+    <button class="tab" data-tab="agenda">Agenda</button>
+  </nav>
+
+  <!-- TAB : WATCHLIST -->
+  <section class="tab-panel active" data-panel="watchlist">
+    {% if page.watchlist_top %}
+    <div class="section-label">Top mouvements du jour</div>
     <div class="watchlist-cards">
       {% for stock in page.watchlist_top %}
       <div class="stock-card">
@@ -15,48 +29,113 @@ layout: default
       </div>
       {% endfor %}
     </div>
-  </section>
-  {% endif %}
+    {% endif %}
 
-  <div class="report-header">
-    <time>{{ page.date | date: '%A %d %B %Y' }}</time>
-    <h1>{{ page.title }}</h1>
-    {% if page.tagline %}<p class="tagline">{{ page.tagline }}</p>{% endif %}
-  </div>
-
-  {% if page.performance %}
-  <div class="ticker">
-    <div class="tile"><span>CAC 40</span><strong class="{% if page.performance.cac40 contains '-' %}neg{% else %}pos{% endif %}">{{ page.performance.cac40 }}</strong></div>
-    <div class="tile"><span>S&amp;P 500</span><strong class="{% if page.performance.sp500 contains '-' %}neg{% else %}pos{% endif %}">{{ page.performance.sp500 }}</strong></div>
-    <div class="tile"><span>Nasdaq</span><strong class="{% if page.performance.nasdaq contains '-' %}neg{% else %}pos{% endif %}">{{ page.performance.nasdaq }}</strong></div>
-    <div class="tile"><span>Dow Jones</span><strong class="{% if page.performance.dowjones contains '-' %}neg{% else %}pos{% endif %}">{{ page.performance.dowjones }}</strong></div>
-  </div>
-  {% endif %}
-
-  <div class="report-body">
-    {{ content }}
-  </div>
-
-  {% if page.watchlist_all %}
-  <section class="watchlist-table">
-    <h2>Toute ma watchlist</h2>
+    {% if page.watchlist_all %}
+    <div class="section-label">Toutes les actions</div>
     {% assign by_sector = page.watchlist_all | group_by: 'sector' %}
-    {% for group in by_sector %}
-    <div class="sector-group">
-      <h3>{{ group.name }}</h3>
-      <table>
-        <tbody>
-          {% for stock in group.items %}
-          <tr>
-            <td class="t-ticker">{{ stock.ticker }}</td>
-            <td class="t-name">{{ stock.name }}</td>
-            <td class="t-change {% if stock.change contains '-' %}neg{% elsif stock.change contains '+' %}pos{% endif %}">{{ stock.change }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    <div class="sector-grid">
+      {% for group in by_sector %}
+      <div class="sector-block">
+        <h3>{{ group.name }}</h3>
+        <table>
+          <tbody>
+            {% for stock in group.items %}
+            <tr>
+              <td class="t-ticker">{{ stock.ticker }}</td>
+              <td class="t-name">{{ stock.name }}</td>
+              <td class="t-change {% if stock.change contains '-' %}neg{% elsif stock.change contains '+' %}pos{% endif %}">{{ stock.change }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
+    {% endif %}
   </section>
-  {% endif %}
+
+  <!-- TAB : MARCHES -->
+  <section class="tab-panel" data-panel="marches">
+    {% if page.en_bref %}
+    <div class="intro-box">
+      <div class="section-label">En bref</div>
+      <p>{{ page.en_bref }}</p>
+    </div>
+    {% endif %}
+
+    {% if page.indices %}
+    <div class="section-label">Indices a la cloture</div>
+    <table class="data-table">
+      <thead><tr><th>Indice</th><th>Valeur</th><th>Variation</th></tr></thead>
+      <tbody>
+      {% for i in page.indices %}
+        <tr>
+          <td>{{ i.name }}</td>
+          <td class="num">{{ i.value }}</td>
+          <td class="num {% if i.change contains '-' %}neg{% else %}pos{% endif %}">{{ i.change }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </section>
+
+  <!-- TAB : MOUVEMENTS -->
+  <section class="tab-panel" data-panel="mouvements">
+    {% if page.movers_cac %}
+    <div class="section-label">CAC 40 - Top mouvements (hors watchlist)</div>
+    <div class="movers-grid">
+      <div><strong>Hausses</strong><ul>{% for m in page.movers_cac.hausses %}<li><span>{{ m.name }}</span><span class="pos">{{ m.change }}</span></li>{% endfor %}</ul></div>
+      <div><strong>Baisses</strong><ul>{% for m in page.movers_cac.baisses %}<li><span>{{ m.name }}</span><span class="neg">{{ m.change }}</span></li>{% endfor %}</ul></div>
+    </div>
+    {% endif %}
+
+    {% if page.movers_sp %}
+    <div class="section-label">S&amp;P 500 - Top mouvements</div>
+    <div class="movers-grid">
+      <div><strong>Hausses</strong><ul>{% for m in page.movers_sp.hausses %}<li><span>{{ m.name }}</span><span class="pos">{{ m.change }}</span></li>{% endfor %}</ul></div>
+      <div><strong>Baisses</strong><ul>{% for m in page.movers_sp.baisses %}<li><span>{{ m.name }}</span><span class="neg">{{ m.change }}</span></li>{% endfor %}</ul></div>
+    </div>
+    {% endif %}
+
+    {% if page.secteurs %}
+    <div class="section-label">Secteurs en mouvement</div>
+    <ul class="plain-list">
+      {% for s in page.secteurs %}<li><strong>{{ s.name }}</strong> &mdash; {{ s.note }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+  </section>
+
+  <!-- TAB : AGENDA -->
+  <section class="tab-panel" data-panel="agenda">
+    {% if page.evenements %}
+    <div class="section-label">Evenements marquants</div>
+    <ul class="plain-list">
+      {% for e in page.evenements %}<li>{{ e }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if page.agenda %}
+    <div class="section-label">A surveiller aujourd'hui</div>
+    <ul class="plain-list">
+      {% for a in page.agenda %}<li>{{ a }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+  </section>
+
+  <script>
+  (function(){
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.tab-panel');
+    tabs.forEach(function(t){
+      t.addEventListener('click', function(){
+        tabs.forEach(function(x){ x.classList.remove('active'); });
+        panels.forEach(function(p){ p.classList.remove('active'); });
+        t.classList.add('active');
+        document.querySelector('.tab-panel[data-panel="' + t.dataset.tab + '"]').classList.add('active');
+      });
+    });
+  })();
+  </script>
 </article>
